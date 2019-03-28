@@ -32,16 +32,32 @@ exports.up = function(knex, Promise) {
          ,onDelete('CASCADE')
          .onUpdate('CASCADE')
     })
-
     .createTable('ingredients', tbl => {
         tbl.increments();
 
         tbl
+         .string('name', 128)
+         .notNullable()
+         .unique();
+
+        tbl
+         .integer('recipe_id')
+         .unsigned()
+         .notNullable()
+         .references('id')
+
     })
+    // .createTable('recipes_ingredients', tbl => {
+    //     tbl.
+    // })
+
   
 };
 
 // undo changes from up function
 exports.down = function(knex, Promise) {
-    return knex.schema.dropTableIfExists('dishes');
+    return knex.schema
+    .dropTableIfExists('dishes')
+    .dropTableIfExists('recipes')
+    .dropTableIfExists('ingredients');
 };
