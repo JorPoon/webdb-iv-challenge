@@ -21,6 +21,11 @@ exports.up = function(knex, Promise) {
          .string('name', 128)
          .notNullable()
          .unique;
+
+        tbl
+         .string('instructions', 255)
+         .notNullable()
+         .unique();
         
         //connect to dish table 
         tbl
