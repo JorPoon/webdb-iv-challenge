@@ -4,7 +4,7 @@ exports.up = function(knex, Promise) {
     
     .createTable('dishes', function(tbl) {
         //primary key (auto increments)
-        tbl.increment();
+        tbl.increments();
 
         //names of the dishes - required - must be different
         tbl
@@ -29,7 +29,7 @@ exports.up = function(knex, Promise) {
          .notNullable()
          .references('id')
          .inTable('dishes')
-         ,onDelete('CASCADE')
+         .onDelete('CASCADE')
          .onUpdate('CASCADE')
     })
     .createTable('ingredients', tbl => {
